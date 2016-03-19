@@ -1,0 +1,32 @@
+
+html{
+  font-family: ”宋体”,“Arial”,”Microsoft YaHei”,”黑体”,sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  font-size:14px;
+  font-color :#666;
+  background-color: #FFF;
+}
+body {
+  margin: 0;
+  position: relative;
+  overflow-y: scroll;
+}
+
+.home-enter {
+  opacity: 0.01;
+}
+
+.home-enter.home-enter-active {
+  opacity: 1;
+  transition: all 1000ms ease-in-out;
+}
+
+.home-leave {
+  opacity: 1;
+}
+
+.home-leave.home-leave-active {
+  opacity: 0.01;
+  transition: all 1000ms ease-in-out;
+}
