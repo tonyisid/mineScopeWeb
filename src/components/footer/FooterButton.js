@@ -26,7 +26,6 @@ export default class FooterButton extends React.Component {
         width: '36px',
         height: '36px',
         color: '#d9d9d9',
-        background: '#FFF',
         border: '1px solid #d9d9d9',
         borderRadius: '18px',
       }

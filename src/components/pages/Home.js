@@ -32,7 +32,7 @@ export default class Home extends React.Component {
     })
     return (
       <div>
-        <div>
+        <div style={ styles.container }>
           { renderProducts }
         </div>
         <FooterButton />

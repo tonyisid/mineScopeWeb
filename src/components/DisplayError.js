@@ -39,7 +39,8 @@ class DisplayError extends React.Component {
         opacity : '0.7',
         color : '#FFF',
         fontWeight: 700,
-        zIndex : 9999
+        zIndex : 9999,
+        boxShadow: '0 1px 2px 0 rgba(0,0,0,0.22)'
       },
       info : {
         textAlign : 'center'

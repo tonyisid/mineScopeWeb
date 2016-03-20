@@ -11,9 +11,15 @@ const actionHandlers = {
     editPane: true,
     userPane: false
   }),
+  [constants.HIDE_EDIT_PANE]: (state, action) => ({
+    editPane: false
+  }),
   [constants.SHOW_USER_PANE]: (state, action) => ({
     userPane: true,
     editPane: false
+  }),
+  [constants.HIDE_USER_PANE]: (state, action) => ({
+    userPane: false
   }),
 }
 

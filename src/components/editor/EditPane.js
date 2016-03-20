@@ -5,17 +5,20 @@ import { Button,Label,Input } from '../common'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as productActions from '../../actions/product'
+import * as viewsActions from '../../actions/views'
 
 @connect(state => ({
   products: state.products,
   views: state.views
 }), dispatch => ({
-  productActions: bindActionCreators(productActions, dispatch)
+  productActions: bindActionCreators(productActions, dispatch),
+  viewsActions: bindActionCreators(viewsActions, dispatch)
 }))
 @Radium
 export default class EditPane extends React.Component {
   static propTypes = {
     productActions : React.PropTypes.object,
+    viewsActions : React.PropTypes.object,
     views : React.PropTypes.object
   }
   constructor () {
@@ -35,6 +38,10 @@ export default class EditPane extends React.Component {
     e.preventDefault()
     this.props.productActions.addProduct(this.state)
   }
+  handleCancel (e) {
+    e.preventDefault()
+    this.props.viewsActions.hideEditPane()
+  }
   render () {
     const styles = {
       mainWraper : {
@@ -42,8 +49,13 @@ export default class EditPane extends React.Component {
       },
       maskPane : {
         position: 'fixed',
+        top: 0,
+        left: 0,
         width: '100%',
         height: '100%',
+        background: '#EEE',
+        opacity: 0.7,
+        zIndex: 666,
       },
       mainContent: {
         position: 'absolute',
@@ -61,7 +73,8 @@ export default class EditPane extends React.Component {
         fontSize : '14px',
         color : '#333',
         outline : 'none',
-        boxShadow: ' 0 1px 5px 0 rgba(0,0,0,0.25)'
+        boxShadow: ' 0 1px 5px 0 rgba(0,0,0,0.25)',
+        zIndex: 667,
       },
       actionBar: {
         background: '#EEE',
@@ -126,7 +139,8 @@ export default class EditPane extends React.Component {
       return null
     return (
       <div style={ styles.mainContainer }>
-        <div style={ styles.caret }></div>
+        <div style={ styles.maskPane } onClick={ ::this.handleCancel }>
+        </div>
         <div style={ styles.mainContent }>
           <form onChange={ ::this.handleFormChange }
             onSubmit={ ::this.handleFormSubmit } >
@@ -161,7 +175,8 @@ export default class EditPane extends React.Component {
             </ul>
             <div style={ styles.actionBar }>
               <div style={ styles.buttonsWrap } >
-                <Button style={ styles.actionButton }>
+                <Button style={ styles.actionButton }
+                  onClick={ ::this.handleCancel }>
                   取消
                 </Button>
                 <Button style={ styles.actionButton }>

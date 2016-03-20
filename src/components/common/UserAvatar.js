@@ -1,13 +1,26 @@
 import React from 'react'
 import Link from './Link'
-import { Glyphicon } from 'react-bootstrap'
 import defaultUser from '../../../assets/images/default_user.png'
 import UserPane from '../header/UserPane'
+import { Button } from '../common'
+import { connect } from 'react-redux'
+import * as viewsActions from '../../actions/views'
+import * as applicationActions from '../../actions/application'
+import { bindActionCreators } from 'redux'
+
+@connect(state => ({
+  application: state.application,
+  views : state.views
+}), dispatch => ({
+  viewsActions : bindActionCreators(viewsActions, dispatch),
+  applicationActions : bindActionCreators(applicationActions, dispatch)
+}))
 
 export default class UserAvatar extends React.Component {
   static propTypes = {
     application : React.PropTypes.object,
-    applicationActions : React.PropTypes.object
+    applicationActions : React.PropTypes.object,
+    viewsActions : React.PropTypes.object
   }
   componentDidMount () {
     window.onbeforeunload = () => {
@@ -17,6 +30,14 @@ export default class UserAvatar extends React.Component {
   handleLogout (e) {
     e.preventDefault()
     this.props.applicationActions.logout()
+  }
+  handleCreate (e) {
+    e.preventDefault()
+    this.props.viewsActions.showEditPane()
+  }
+  handleUserPane (e) {
+    e.preventDefault()
+    this.props.viewsActions.showUserPane()
   }
   render () {
     const styles = {
@@ -30,24 +51,29 @@ export default class UserAvatar extends React.Component {
         display : 'block',
         height : '30px',
         width : '30px',
-        margin : '2px',
+        margin : '1px',
         borderRadius : '15px',
         outline : 'none'
       },
       leftAvatar : {
-        float : 'left'
+        float : 'left',
+        margin: 1,
+        border: 'none',
+        borderRadius : '6px 0 0 6px',
+        padding: 0,
       },
       user : {
         height : '32px',
         marginLeft : '0px',
-        marginRight : '40px',
+        marginRight : '38px',
         //lineHeight : '36px',
         border : '1px solid #d4d4d4',
         borderRadius : '6px 0 0 6px',
         fontSize : '11px',
         color : '#343434'
       },
-      logout : {
+      rightButton : {
+        margin : 0,
         float : 'right',
         width : '40px',
         height : '34px',
@@ -57,7 +83,6 @@ export default class UserAvatar extends React.Component {
         lineHeight : '34px',
         textAlign : 'center',
         borderRadius : '0 6px 6px 0',
-        backgroundColor : '#d4d4d4',
       },
       border : {
         marginTop : '5px',
@@ -69,18 +94,13 @@ export default class UserAvatar extends React.Component {
     const { user } = this.props.application
     return (
       <div style={ styles.container }>
-        <Link style={ styles.leftAvatar } to="/account">
+        <Button style={ styles.leftAvatar } onClick={ ::this.handleUserPane } >
           <img style={ styles.image } src = { user.avatar || defaultUser } />
-        </Link>
-        <span style={ styles.logout }>
-          <a  href="#" onClick={ ::this.handleLogout }>
-            添加
-          </a>
-        </span>
+        </Button>
+        <Button style={ styles.rightButton } onClick={ ::this.handleCreate }>
+          添加
+        </Button>
         <div style={ styles.user }>
-          <Link to="/account">
-            { user.name || user.email || user.mobile }
-          </Link><br/>
         </div>
         <UserPane />
       </div>
