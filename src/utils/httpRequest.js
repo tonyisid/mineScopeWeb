@@ -3,6 +3,7 @@ import * as storage from '../persistence/storage'
 const SERVER = 'http://localhost:8888'
 
 const NETWORK_ERR = 'Maybe problem of network, please try again.'
+const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRvbnlxLnplbmdAMTYzLmNvbSIsImlkIjoiNTY5NGQxYmRmMWY1NGYwMDAwMDAwMDAxIiwicHJpdmlsZWdlIjpbXSwiaWF0IjoxNDU4NDc3MzU5LCJleHAiOjE0NTg1NjM3NTl9.7ChdKDj2LiOfYFAiUZ0WZgJN8RuMTHuYNzIz3KeJ5Vc'
 export const API ={
   USER : {
     LOGIN : SERVER + '/login',
@@ -17,7 +18,7 @@ export const API ={
     THIRD_PART_LOGIN : SERVER + '/account/qrcode'
   },
   PRODUCT : {
-    GET_WORK : SERVER + '/products',
+    PRODUCTS : SERVER + '/products',
   },
   TAG : {
     CREATE_TAG : SERVER + '/tags/create',
@@ -25,11 +26,13 @@ export const API ={
     QUERY_TAGS : SERVER + '/tags/query'
   }
 }
-export function post (url, data) {
+
+export function fetch (url, type, data) {
+  console.log(type);
   return new Promise(function (resolve,reject) {
     $.ajax({
       url : url,
-      type : 'POST',
+      type : type,
       dataType : 'json',
       data : data,
       timeout : 5000,
@@ -37,21 +40,34 @@ export function post (url, data) {
       xhrFields:{
         withCredentials : true
       },
+      beforeSend: function (request) {
+        request.setRequestHeader('token', token)
+      },
       success : (resp, statusText, request) => {
         console.log(resp)
         resolve(resp)
       } ,
-      error : (request, statusText, error) => {
-        console.log(error)
+      error : (resp, statusText, error) => {
         reject({
-          status : request.status,
-          errorMessage : NETWORK_ERR
+          status : resp.status,
+          errorMessage : resp.responseJSON.message
         })
       }
     })
   })
 }
-
+export function post (url, data) {
+  return fetch(url,'POST', data)
+}
+export function del (url, data) {
+  return fetch(url, 'DETLETE', data)
+}
+export function put (url, data) {
+  return fetch(url, 'PUT', data)
+}
+export function get (url, data) {
+  return fetch (url, 'GET', data)
+}
 export function postFile (url, data) {
   return new Promise(function (resolve,reject) {
     $.ajax({
@@ -81,24 +97,6 @@ export function postFile (url, data) {
     })
   })
 }
-export function get (url, data) {
-  return new Promise(function (resolve,reject) {
-    $.ajax({
-      url : url,
-      type : 'GET',
-      dataType : 'json',
-      data : data,
-      timeout : 5000,
-      crossDomain : true,
-      xhrFields:{
-        withCredentials : true
-      },
-      success : resp => resolve(resp) ,
-      error : error => reject(error)
-    })
-  })
-}
-
 export function getStatic (url, data) {
   return new Promise(function (resolve,reject) {
     $.ajax({

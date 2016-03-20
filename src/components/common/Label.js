@@ -18,9 +18,9 @@ export default class PinLabel extends React.Component {
       }
     }
     return (
-      <div className={ this.props.className } style={ [styles.base, this.props.style] }>
+      <label className={ this.props.className } style={ [styles.base, this.props.style] }>
         { this.props.children }
-      </div>
+      </label>
     )
   }
 }

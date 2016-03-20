@@ -4,25 +4,21 @@ import handleActionError from '../utils/handle-action-error'
 
 export function getProducts ( option ) {
   return dispatch => {
-    get(API.PRODUCT.GET_WORK,option)
+    get(API.PRODUCT.PRODUCTS,option)
     .then(resp => {
       dispatch({
-        type : constants.GET_WORKS,
-        payload : resp
+        type : constants.GET_PRODUCTS,
+        payload : resp.data
       })
     }, error => {
-      dispatch({
-        type : constants.GET_WROKS_ERROR,
-        payload : error
-      })
       handleActionError(dispatch,error,constants.GET_WORKS)
     })
   }
 }
 
-export function addProducts ( product ) {
+export function addProduct ( product ) {
   return dispatch => {
-    post(API.WORKS, product)
+    post(API.PRODUCT.PRODUCTS, product)
     .then(resp => {
       dispatch({
         type : constants.ADD_PRODUCT,

@@ -31,7 +31,7 @@ export default class Application extends React.Component {
     const activeClass = isMenuActive ? 'active' : ''
     const styles = {
       mainContent : {
-        marginTop: '54px'
+        marginTop: '54px',
       }
     }
     return (

@@ -3,7 +3,7 @@ import Radium from 'radium'
 import classnames from 'classnames'
 
 @Radium
-export default class PinButton extends React.Component {
+export default class Button extends React.Component {
   static propTypes = {
     children : React.PropTypes.any,
     className : React.PropTypes.any,
@@ -14,15 +14,20 @@ export default class PinButton extends React.Component {
   render () {
     const styles = {
       default : {
-        backgroundColor : '#FF6F46',
-        borderStyle : 'solid',
-        borderWidth : '1px',
-        borderColor : '#C5321F',
+        // background: 'linear-gradient(#fff, #f5f5f5)',
+        backgroundColor : '#FFF',
+        border : '1px solid #d9d9d9',
         outline : 'none',
+        minWidth: '20px',
+        minHeight: '20px',
         margin : '5px',
-        color : '#FFF',
+        color : '#333',
         fontSize : '13px',
-        fontWeight : 700
+        fontWeight : 700,
+        cursor: 'pointer',
+        ':hover': {
+          backgroundColor: '#f9f9f9'
+        },
         /*
         fontSize : '14px',
         height : '32px',

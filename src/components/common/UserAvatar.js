@@ -2,6 +2,7 @@ import React from 'react'
 import Link from './Link'
 import { Glyphicon } from 'react-bootstrap'
 import defaultUser from '../../../assets/images/default_user.png'
+import UserPane from '../header/UserPane'
 
 export default class UserAvatar extends React.Component {
   static propTypes = {
@@ -20,16 +21,17 @@ export default class UserAvatar extends React.Component {
   render () {
     const styles = {
       container : {
+        position: 'relative',
         padding : '7px',
         width : '200px',
         height : '34px'
       },
       image : {
         display : 'block',
-        height : '34px',
-        width : '34px',
-        // marginTop : '5px',
-        borderRadius : '17px',
+        height : '30px',
+        width : '30px',
+        margin : '2px',
+        borderRadius : '15px',
         outline : 'none'
       },
       leftAvatar : {
@@ -37,10 +39,11 @@ export default class UserAvatar extends React.Component {
       },
       user : {
         height : '32px',
-        marginLeft : '17px',
+        marginLeft : '0px',
         marginRight : '40px',
         //lineHeight : '36px',
         border : '1px solid #d4d4d4',
+        borderRadius : '6px 0 0 6px',
         fontSize : '11px',
         color : '#343434'
       },
@@ -71,7 +74,7 @@ export default class UserAvatar extends React.Component {
         </Link>
         <span style={ styles.logout }>
           <a  href="#" onClick={ ::this.handleLogout }>
-            登出
+            添加
           </a>
         </span>
         <div style={ styles.user }>
@@ -79,6 +82,7 @@ export default class UserAvatar extends React.Component {
             { user.name || user.email || user.mobile }
           </Link><br/>
         </div>
+        <UserPane />
       </div>
     )
   }

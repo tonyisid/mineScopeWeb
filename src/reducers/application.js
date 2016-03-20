@@ -28,7 +28,7 @@ const actionHandlers = {
       // with some user-friendly messages.
       error: {
         source,
-        message: payload.message,
+        message: payload.errorMessage,
         statusCode: payload.statusCode || payload.code,
         body: payload.body || (payload instanceof Error ?
           (payload.toString() + '\n' + payload.stack) : payload)

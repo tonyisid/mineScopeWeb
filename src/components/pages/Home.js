@@ -4,16 +4,18 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as productActions from '../../actions/product'
 import Thumbnail from '../common/Thumbnail'
+import FooterButton from '../footer/FooterButton'
+import EditPane from '../editor/EditPane'
 
 @connect(state => ({
-  products: state.products
+  product: state.product
 }), dispatch => ({
   actions: bindActionCreators(productActions, dispatch)
 }))
 export default class Home extends React.Component {
   static propTypes = {
     actions : React.PropTypes.object,
-    products : React.PropTypes.array,
+    product : React.PropTypes.object,
   }
   componentDidMount () {
     this.props.actions.getProducts()
@@ -24,18 +26,17 @@ export default class Home extends React.Component {
         padding : '20px'
       },
     }
-    const { products } = this.props
-    const renderProducts = products && products.map(product => {
-      return (<Thumbnail product={ product } />)
+    const { product } = this.props
+    const renderProducts = product.products && product.products.map(product => {
+      return (<Thumbnail key={ product._id } product={ product } />)
     })
     return (
       <div>
-        <div className="header">
-          <h1>mine scope</h1>
-        </div>
         <div>
           { renderProducts }
         </div>
+        <FooterButton />
+        <EditPane />
       </div>
     )
   }

@@ -20,12 +20,12 @@ export default class Thumbnail extends React.Component {
   render () {
     const styles = {
       main : {
+        display: 'inline-block',
         position : 'relative',
-        width : '140px',
-        height : '140px',
+        width : '236px',
         border : '1px solid #445F80',
-        borderRadius : '4px',
-        margin : '20px',
+        borderRadius : '6px',
+        margin : '14px 7px 0px 7px',
         backgroundColor : '#FFF',
         ':hover' : {
           boxShadow: '-10px 0px 20px #DDD',

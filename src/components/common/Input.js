@@ -17,7 +17,7 @@ export default class PinInput extends React.Component {
     const styles = {
       default : {
         display : 'block',
-        //width : '90%',
+        width : '90%',
         borderStyle : 'solid',
         borderWidth : '1px',
         borderColor : '#BBB',
