@@ -4,20 +4,20 @@ import classnames from 'classnames'
 import { Button,Label,Input } from '../common'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import * as productActions from '../../actions/product'
+import * as boardActions from '../../actions/board'
 import * as viewsActions from '../../actions/views'
 
 @connect(state => ({
   products: state.products,
   views: state.views
 }), dispatch => ({
-  productActions: bindActionCreators(productActions, dispatch),
+  boardActions: bindActionCreators(boardActions, dispatch),
   viewsActions: bindActionCreators(viewsActions, dispatch)
 }))
 @Radium
 export default class EditPane extends React.Component {
   static propTypes = {
-    productActions : React.PropTypes.object,
+    boardActions : React.PropTypes.object,
     viewsActions : React.PropTypes.object,
     views : React.PropTypes.object
   }
@@ -36,7 +36,7 @@ export default class EditPane extends React.Component {
   }
   handleFormSubmit (e) {
     e.preventDefault()
-    this.props.productActions.addProduct(this.state)
+    this.props.boardActions.addBoard(this.state)
   }
   handleCancel (e) {
     e.preventDefault()
@@ -137,6 +137,7 @@ export default class EditPane extends React.Component {
     }
     if (!this.props.views.editPane)
       return null
+    else
     return (
       <div style={ styles.mainContainer }>
         <div style={ styles.maskPane } onClick={ ::this.handleCancel }>
@@ -161,15 +162,9 @@ export default class EditPane extends React.Component {
                 </div>
               </li>
               <li style={ styles.listItem }>
-                <Label style={ styles.label }>目录</Label>
+                <Label style={ styles.label }>封面</Label>
                 <div style={ styles.inputWrap }>
-                  <Input name='category' value={ this.state.category }/>
-                </div>
-              </li>
-              <li style={ styles.listItem }>
-                <Label style={ styles.label }>Web 地址</Label>
-                <div style={ styles.inputWrap }>
-                  <Input name='url' value={ this.state.url }/>
+                  <Input name='cover' value={ this.state.cover }/>
                 </div>
               </li>
             </ul>

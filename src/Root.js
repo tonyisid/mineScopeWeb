@@ -14,6 +14,7 @@ import * as constants from './constants'
 const {
   Application,
   Home,
+  Board,
   Login,
 } = components
 
@@ -29,7 +30,7 @@ export const store = configureStore(initialState)
 
 function getRootChildren (props) {
   const rootChildren = [
-      renderRoutes()
+    renderRoutes()
   ]
 
   if (__DEVTOOLS__) {
@@ -43,7 +44,8 @@ function renderRoutes () {
   return (
     <ReduxRouter key='router'>
       <Route component={Application}>
-        <Route path="/" component={Home} />
+        <Route path="/" component={ Home } />
+        <Route path="/board/:boardID" component={ Board } />
         <Route path="login" component={Login} />
         <Route path="logout" onEnter={logout} />
       </Route>

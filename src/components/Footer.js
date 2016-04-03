@@ -1,4 +1,5 @@
 import React from 'react'
+import FooterButton from './footer/FooterButton'
 
 export default class Footer extends React.Component {
 
@@ -21,6 +22,7 @@ export default class Footer extends React.Component {
             &copy; 2015
           </div>
         </div>
+        <FooterButton />
       </div>
     )
   }

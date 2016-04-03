@@ -1,9 +1,10 @@
 import React from 'react'
-import { UserAvatar, Button } from './'
+import { UserBar, Button } from './'
 import { connect } from 'react-redux'
 import * as applicationActions from '../../actions/application'
 import { bindActionCreators } from 'redux'
 import { Glyphicon } from 'react-bootstrap'
+import EditPane from '../editor/EditPane'
 
 @connect(state => ({
   application: state.application,
@@ -142,7 +143,7 @@ export default class Header extends React.Component {
       <div style={ styles.container }>
         <div style={ styles.headerWrap }>
           <div style={ styles.right }>
-            <UserAvatar { ...this.props } />
+            <UserBar { ...this.props } />
           </div>
           <div style={ styles.navHeader }>
             <Button style={ styles.searchLeft }>
@@ -156,6 +157,7 @@ export default class Header extends React.Component {
             </div>
           </div>
         </div>
+        <EditPane />
       </div>
       )
   }

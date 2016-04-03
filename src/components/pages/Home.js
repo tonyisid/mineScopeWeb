@@ -2,23 +2,24 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import * as productActions from '../../actions/product'
+import * as boardActions from '../../actions/board'
 import Thumbnail from '../common/Thumbnail'
 import FooterButton from '../footer/FooterButton'
 import EditPane from '../editor/EditPane'
+import Masonry from 'react-masonry-component'
 
 @connect(state => ({
-  product: state.product
+  board: state.board
 }), dispatch => ({
-  actions: bindActionCreators(productActions, dispatch)
+  actions: bindActionCreators(boardActions, dispatch)
 }))
 export default class Home extends React.Component {
   static propTypes = {
     actions : React.PropTypes.object,
-    product : React.PropTypes.object,
+    board : React.PropTypes.object,
   }
   componentDidMount () {
-    this.props.actions.getProducts()
+    this.props.actions.getBoards()
   }
   render () {
     const styles ={
@@ -26,17 +27,18 @@ export default class Home extends React.Component {
         padding : '20px'
       },
     }
-    const { product } = this.props
-    const renderProducts = product.products && product.products.map(product => {
-      return (<Thumbnail key={ product._id } product={ product } />)
+    const { board } = this.props
+    const renderBoards = board.boards && board.boards.map(board => {
+      return (<Thumbnail key={ board._id } board={ board } />)
     })
     return (
       <div>
-        <div style={ styles.container }>
-          { renderProducts }
-        </div>
+        <Masonry style={ styles.container }
+        className={'my-gallery-class'} // default ''
+              elementType={'ul'}>
+          { renderBoards }
+        </Masonry>
         <FooterButton />
-        <EditPane />
       </div>
     )
   }

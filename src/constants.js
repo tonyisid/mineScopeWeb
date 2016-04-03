@@ -19,6 +19,11 @@ export const ADD_PRODUCT = 'ADD_PRODUCT'
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
 export const DELETE_PRODUCT = 'DELETE_PRODUCT'
 
+export const GET_BOARDS = 'GET_BOARDS'
+export const ADD_BOARDS = 'ADD_BOARDS'
+export const UPDATE_BOARDS = 'UPDATE_BAORDS'
+export const DELETE_BOARDS = 'DELETE_BOARDS'
+
 export const SHOW_EDIT_PANE = 'SHOW_EDIT_PANE'
 export const HIDE_EDIT_PANE = 'HIDE_EDIT_PANE'
 export const SHOW_USER_PANE = 'SHOW_USER_PANE'

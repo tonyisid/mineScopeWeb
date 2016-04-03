@@ -3,7 +3,7 @@ import * as storage from '../persistence/storage'
 const SERVER = 'http://localhost:8888'
 
 const NETWORK_ERR = 'Maybe problem of network, please try again.'
-const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRvbnlxLnplbmdAMTYzLmNvbSIsImlkIjoiNTY5NGQxYmRmMWY1NGYwMDAwMDAwMDAxIiwicHJpdmlsZWdlIjpbXSwiaWF0IjoxNDU4NDc3MzU5LCJleHAiOjE0NTg1NjM3NTl9.7ChdKDj2LiOfYFAiUZ0WZgJN8RuMTHuYNzIz3KeJ5Vc'
+const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRvbnlxLnplbmdAMTYzLmNvbSIsImlkIjoiNTY5NGQxYmRmMWY1NGYwMDAwMDAwMDAxIiwicHJpdmlsZWdlIjpbXSwiaWF0IjoxNDU5Njc3NTE5LCJleHAiOjE0NTk3NjM5MTl9.mb16oIOK1X043iC3lMXBZ1pRmjWIZk7PKV0Kvumdx-k'
 export const API ={
   USER : {
     LOGIN : SERVER + '/login',
@@ -17,6 +17,7 @@ export const API ={
     GET_CHARGE_RESULT : SERVER + '/account/queryCharge',
     THIRD_PART_LOGIN : SERVER + '/account/qrcode'
   },
+  BOARDS : SERVER + '/boards',
   PRODUCT : {
     PRODUCTS : SERVER + '/products',
   },

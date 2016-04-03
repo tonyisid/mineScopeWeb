@@ -1,10 +1,12 @@
 import React from 'react'
 import Radium from 'radium'
 import UploadThumbnail from './UploadThumbnail'
+import UserAvatar from './UserAvatar'
+
 @Radium
 export default class Thumbnail extends React.Component {
   static propTypes = {
-    product : React.PropTypes.object,
+    board : React.PropTypes.object,
     actions : React.PropTypes.any,
     selected : React.PropTypes.bool,
     editMode : React.PropTypes.bool
@@ -42,16 +44,18 @@ export default class Thumbnail extends React.Component {
       },
       imageStyles : {
         width : '100%',
+        minHeight: '150px',
         borderRadius: '6px 6px 0 0',
-        margin : 0
+        margin : 0,
+        border: 'none'
       },
       uploadMask : {
         position : 'absolute',
         top : 0,
       },
       title : {
-        padding: '5px',
-        borderTop: '1px solid #ddd',
+        padding: '5px 10px',
+        // borderTop: '1px solid #ddd',
         textAlign : 'left',
         fontSize : '11px',
         color : '#333'
@@ -59,22 +63,49 @@ export default class Thumbnail extends React.Component {
       timeFormat : {
         fontSize : '10px',
         color : '#BBB'
+      },
+      likePane : {
+        // borderTop: '1px solid #ddd',
+        color: '#DDD',
+        fontSize: '11px',
+        padding: '5px 10px',
+      },
+      owner: {
+        borderTop: '1px solid #ddd',
+      },
+      likeMembers: {
+        borderTop: '1px solid #ddd',
       }
     }
     const containerStyles = this.props.selected ?
       [ styles.main,styles.selected ] : [ styles.main ]
-    const product = this.props
+    const { board } = this.props
+    const renderMembers = board.likeMembers.map(member =>{
+      return (<UserAvatar key={ member._id } user={ member } />)
+    })
     return (
         <div style={ containerStyles }
           onClick={ this.handleClick } >
-          <img style={ styles.imageStyles }
-            src={ this.props.product ? this.props.product.cover : ''} />
+          <div style={ styles.imageWrap }>
+            <img style={ styles.imageStyles }
+              src={ this.props.board ? this.props.board.cover : ''} />
+          </div>
           <div style={ styles.title }>
-            <p>{ this.props.product.title }</p>
+            <p>{ this.props.board.title }</p>
             <span style={ styles.timeFormat }>
-              { this.props.product.createdTime &&
-                this.props.product.createdTime.substr(0,10) }
+              { board.createdTime &&
+                board.createdTime.substr(0,10) }
             </span>
+          </div>
+          <div style={ styles.likePane }>
+            { board.likeCount }
+          </div>
+          <div style={ styles.owner }>
+            <span>{ board.owner.name }</span>
+            <UserAvatar user={ board.owner } />
+          </div>
+          <div style={ styles.likeMembers }>
+            { renderMembers }
           </div>
         </div>
     )

@@ -32,6 +32,8 @@ export default class Application extends React.Component {
     const styles = {
       mainContent : {
         marginTop: '54px',
+        marginLeft: '100px',
+        marginRight: '100px',
       }
     }
     return (
