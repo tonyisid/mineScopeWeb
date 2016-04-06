@@ -4,6 +4,7 @@ import Menu from './Menu'
 import Footer from './Footer'
 import { Header } from './common'
 import DisplayError from './DisplayError'
+import DisplayInfo from './DisplayInfo'
 
 export default class Application extends React.Component {
 
@@ -41,6 +42,7 @@ export default class Application extends React.Component {
         <Header { ...this.props }/>
         <div id="main" style={ styles.mainContent } >
           <DisplayError />
+          <DisplayInfo />
           {/* this will render the child routes */}
           {this.props.children}
         </div>

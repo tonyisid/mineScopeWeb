@@ -4,29 +4,29 @@ import classnames from 'classnames'
 import { Button,Label,Input } from '../common'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import * as boardActions from '../../actions/board'
+import * as applicationActions from '../../actions/application'
 import * as viewsActions from '../../actions/views'
 
 @connect(state => ({
-  products: state.products,
+  application: state.application,
   views: state.views
 }), dispatch => ({
-  boardActions: bindActionCreators(boardActions, dispatch),
+  applicationActions: bindActionCreators(applicationActions, dispatch),
   viewsActions: bindActionCreators(viewsActions, dispatch)
 }))
 @Radium
-export default class EditPane extends React.Component {
+export default class SigninPane extends React.Component {
   static propTypes = {
-    boardActions : React.PropTypes.object,
+    applicationActions : React.PropTypes.object,
     viewsActions : React.PropTypes.object,
     views : React.PropTypes.object
   }
   constructor () {
     super()
     this.state = {
-      title : '',
-      url : '',
-      description: ''
+      email : '',
+      password : '',
+      rememberMe: false
     }
   }
   handleFormChange (e) {
@@ -36,13 +36,15 @@ export default class EditPane extends React.Component {
   }
   handleFormSubmit (e) {
     e.preventDefault()
-    this.props.boardActions.addBoard(this.state)
+    this.props.applicationActions.signin(this.state)
   }
   handleCancel (e) {
     e.preventDefault()
-    this.props.viewsActions.hideEditPane()
+    this.props.viewsActions.hideSigninPane()
   }
   render () {
+    if (!this.props.views.signinPane)
+      return null
     const styles = {
       mainWraper : {
         display : 'block',
@@ -135,9 +137,7 @@ export default class EditPane extends React.Component {
         borderRadius: '6px'
       }
     }
-    if (!this.props.views.editPane)
-      return null
-    else
+
     return (
       <div style={ styles.mainContainer }>
         <div style={ styles.maskPane } onClick={ ::this.handleCancel }>
@@ -146,25 +146,19 @@ export default class EditPane extends React.Component {
           <form onChange={ ::this.handleFormChange }
             onSubmit={ ::this.handleFormSubmit } >
             <div style={ styles.navHeader }>
-              <h2>新建</h2>
+              <h2>登录</h2>
             </div>
             <ul style={ styles.listPane }>
               <li style={ styles.listItem }>
-                <Label style={ styles.label }>标题</Label>
+                <Label style={ styles.label }>登录名</Label>
                 <div style={ styles.inputWrap }>
-                  <Input name='title' value={ this.state.title } />
+                  <Input name='email' value={ this.state.email } />
                 </div>
               </li>
               <li style={ styles.listItem }>
-                <Label style={ styles.label }>描述</Label>
+                <Label style={ styles.label }>密码</Label>
                 <div style={ styles.inputWrap }>
-                  <Input name='description' value={ this.state.description } />
-                </div>
-              </li>
-              <li style={ styles.listItem }>
-                <Label style={ styles.label }>封面</Label>
-                <div style={ styles.inputWrap }>
-                  <Input name='cover' value={ this.state.cover }/>
+                  <Input name='password' value={ this.state.password } />
                 </div>
               </li>
             </ul>
@@ -172,10 +166,10 @@ export default class EditPane extends React.Component {
               <div style={ styles.buttonsWrap } >
                 <Button style={ styles.actionButton }
                   onClick={ ::this.handleCancel }>
-                  取消
+                  注册
                 </Button>
                 <Button style={ styles.actionButton }>
-                  创建
+                  登录
                 </Button>
               </div>
             </div>

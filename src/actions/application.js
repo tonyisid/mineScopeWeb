@@ -1,45 +1,68 @@
 import * as constants from '../constants'
-import { post, API } from '../utils/httpRequest'
+import { post,get, API } from '../utils/httpRequest'
 import * as storage from '../persistence/storage'
+import handleActionError from '../utils/handle-action-error'
+import handleActionInfo from '../utils/displayInfo'
 
-export function login (form, redirect) {
+export function signup (form,redirect) {
   return dispatch => {
     dispatch({
-      type: constants.LOGIN,
+      type: constants.REGISTER
     })
-    post(API.USER.LOGIN,form)
+    post(API.USER.REGISTER,form)
       .then(resp => {
-        if (resp.result) {
-          dispatch({
-            type : constants.LOGIN_SUCCESS,
-            user : resp.data
-          })
-          dispatch({
-            type : constants.DISPLAY_INFO,
-            info : '登录成功！欢迎回来：'+ resp.data.name
-          })
-          if (redirect) redirect
-        } else {
-          dispatch({
-            type : constants.LOGIN_FAILED,
-            error : resp.error
-          })
-        }
-      }, error => {
         dispatch({
-          type : constants.LOGIN_FAILED,
-          error : error
+          type: constants.REGISTER_SUCCESS,
+          user: resp.data,
         })
+        handleActionInfo(dispatch,
+          '注册成功，您可以用手机号码/邮箱地址：' + form.mobile + '登录')
+        if (redirect) redirect
+      }, error => {
+        handleActionError(dispatch,error)
       })
   }
 }
 
-export function checkMobile (mobile) {
+export function signin (form, redirect) {
   return dispatch => {
-    dispatch({
-      type : constants.CHECK_MOBILE
-    })
-    post(API.USER.CHECK_MOBILE,mobile)
+    post(API.USER.LOGIN,form)
+      .then(resp => {
+        dispatch({
+          type : constants.LOGGED_IN,
+          token : resp.token,
+          user : resp.user
+        })
+        dispatch({
+          type : constants.HIDE_SIGNIN_PANE
+        })
+        handleActionInfo(dispatch,
+          '登录成功！欢迎回来'+ (resp.user.name ? ':'+resp.user.name : ''))
+        if (redirect) redirect
+      }, error => {
+        handleActionError(dispatch, error)
+      })
+  }
+}
+export function getCurrentUser (token) {
+  return dispatch => {
+    get(API.USER.CURRENT,token)
+      .then(resp=>{
+        dispatch({
+          type: constants.CURRENT_USER,
+          payload: resp.data
+        })
+      }, error=>{
+        dispatch({
+          type: constants.NO_CURRENT_USER,
+          payload: error
+        })
+      })
+  }
+}
+export function checkEmail (email) {
+  return dispatch => {
+    post(API.USER.CHECK_MOBILE,email)
       .then(resp => {
         if (resp.result)
           dispatch({
@@ -86,37 +109,6 @@ export function applyForSMSCode (form) {
           error: error
         })
       }
-  }
-}
-export function register (form,redirect) {
-  return dispatch => {
-    dispatch({
-      type: constants.REGISTER
-    })
-    post(API.USER.REGISTER,form)
-      .then(resp => {
-        if (resp.result) {
-          dispatch({
-            type: constants.REGISTER_SUCCESS,
-            user: resp.data,
-          })
-          dispatch({
-            type: constants.DISPLAY_INFO,
-            info: '注册成功，您可以用手机号码/邮箱地址：' + form.mobile + '登录'
-          })
-          if (redirect) redirect
-        }
-        else
-          dispatch({
-            type: constants.REGISTER_FAILED,
-            error: resp.error
-          })
-      }, error => {
-        dispatch({
-          type: constants.REGISTER_FAILED,
-          error: error
-        })
-      })
   }
 }
 export function getCurrentUser () {
@@ -188,5 +180,3 @@ export function hideError () {
 export function hideInfo () {
   return { type: constants.HIDE_INFO }
 }
-
-

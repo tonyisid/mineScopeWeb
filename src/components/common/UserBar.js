@@ -39,6 +39,10 @@ export default class UserBar extends React.Component {
     e.preventDefault()
     this.props.viewsActions.showUserPane()
   }
+  handleSiginPane (e) {
+    e.preventDefault()
+    this.props.viewsActions.showSigninPane()
+  }
   render () {
     const styles = {
       container : {
@@ -48,6 +52,7 @@ export default class UserBar extends React.Component {
         height : '34px'
       },
       image : {
+        float : 'left',
         display : 'block',
         height : '30px',
         width : '30px',
@@ -57,10 +62,12 @@ export default class UserBar extends React.Component {
       },
       leftAvatar : {
         float : 'left',
+        width : '158px',
         margin: 1,
         border: 'none',
         borderRadius : '6px 0 0 6px',
         padding: 0,
+        lineHeight: '30px'
       },
       user : {
         height : '32px',
@@ -92,11 +99,20 @@ export default class UserBar extends React.Component {
       }
     }
     const { user } = this.props.application
+    const userButton = user ? (
+      <Button style={ styles.leftAvatar } onClick={ ::this.handleUserPane } >
+        <span>{ user.name }</span>
+        <img style={ styles.image } src = { user.avatar || defaultUser } />
+      </Button>
+    ) : (
+      <Button style={ styles.leftAvatar } onClick={ ::this.handleSiginPane } >
+        <span>点击登录</span>
+        <img style={ styles.image } src = { defaultUser } />
+      </Button>
+    )
     return (
       <div style={ styles.container }>
-        <Button style={ styles.leftAvatar } onClick={ ::this.handleUserPane } >
-          <img style={ styles.image } src = { user.avatar || defaultUser } />
-        </Button>
+        { userButton }
         <Button style={ styles.rightButton } onClick={ ::this.handleCreate }>
           添加
         </Button>

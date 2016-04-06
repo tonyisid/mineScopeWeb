@@ -4,6 +4,7 @@ import createReducer from '../utils/create-reducer'
 const initialState = {
   editPane : false,
   userPane : false,
+  signinPane : false,
 }
 
 const actionHandlers = {
@@ -20,6 +21,12 @@ const actionHandlers = {
   }),
   [constants.HIDE_USER_PANE]: (state, action) => ({
     userPane: false
+  }),
+  [constants.SHOW_SIGNIN_PANE]: (state, action) => ({
+    signinPane: true
+  }),
+  [constants.HIDE_SIGNIN_PANE]: (state, action) => ({
+    signinPane: false
   }),
 }
 

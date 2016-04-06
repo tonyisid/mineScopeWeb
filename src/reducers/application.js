@@ -4,17 +4,16 @@ import createReducer from '../utils/create-reducer'
 const initialState = {
   token: null,
   locale: 'en',
-  user: {
-    // TODO: have a checkbox to update the state
-    // e.g.: on the login page and/or menu
-    // permissions: ['manage_account']
-    permissions: []
-  },
-  error: null
+  user: null,
+  error: null,
+  message: null,
 }
 
 const actionHandlers = {
-  [constants.LOGGED_IN]: (_, action) => action.payload,
+  [constants.LOGGED_IN]: (_, action) => ({
+    token: action.token,
+    user: action.user
+  }),
   [constants.LOG_OUT]: () => ({ token: null }),
   [constants.LOCALE_SWITCHED]: (_, action) => ({ locale: action.payload }),
 
@@ -36,6 +35,13 @@ const actionHandlers = {
     })
   },
   [constants.HIDE_ERROR]: state => ({ ...state, ...{ error: null } }),
+  [constants.SHOW_INFO]: (state, action) => {
+    const { payload, source } = action
+    return Object.assign({}, state, {
+      message: payload
+    })
+  },
+  [constants.HIDE_INFO]: state => ({ ...state, ...{ message: null } }),
 }
 
 export default createReducer(initialState, actionHandlers)

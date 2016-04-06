@@ -22,3 +22,13 @@ export function hideUserPane () {
     type: constants.HIDE_USER_PANE
   }
 }
+export function showSigninPane () {
+  return {
+    type: constants.SHOW_SIGNIN_PANE
+  }
+}
+export function hideSigninPane () {
+  return {
+    type: constants.HIDE_SIGNIN_PANE
+  }
+}

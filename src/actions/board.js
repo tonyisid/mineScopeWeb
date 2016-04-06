@@ -1,6 +1,7 @@
 import * as constants from '../constants'
 import { post, get, put,del, API } from '../utils/httpRequest'
 import handleActionError from '../utils/handle-action-error'
+import displayInfo from '../utils/displayInfo'
 
 export function getBoards ( option ) {
   return dispatch => {
@@ -24,6 +25,10 @@ export function addBoard ( board ) {
         type : constants.ADD_BOARDS,
         payload : resp.data
       })
+      dispatch({
+        type : constants.HIDE_EDIT_PANE
+      })
+      displayInfo(dispatch,'成功创建光棒：'+board.title)
     },error => {
       handleActionError(dispatch, error, constants.ADD_BOARDS)
     })
@@ -38,6 +43,7 @@ export function updateBoard ( board ) {
         type : constants.UPDATE_BOARDS,
         payload : board
       })
+
     }, error => {
       handleActionError(dispatch, error, constants.UPDATE_BOARD)
     })

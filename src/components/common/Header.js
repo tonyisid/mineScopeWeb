@@ -5,6 +5,7 @@ import * as applicationActions from '../../actions/application'
 import { bindActionCreators } from 'redux'
 import { Glyphicon } from 'react-bootstrap'
 import EditPane from '../editor/EditPane'
+import SigninPane from '../signin/Signin'
 
 @connect(state => ({
   application: state.application,
@@ -158,6 +159,7 @@ export default class Header extends React.Component {
           </div>
         </div>
         <EditPane />
+        <SigninPane />
       </div>
       )
   }

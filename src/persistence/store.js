@@ -12,7 +12,7 @@ export default function persistenceHandler (next) {
         storage.put('locale', store.getState().application.locale)
 
         if (action.type === constants.LOGGED_IN)
-          storage.put('token', action.payload.token)
+          storage.put('token', action.token)
 
         if (action.type === constants.LOG_OUT)
           storage.remove('token')
