@@ -17,9 +17,12 @@ const actionHandlers = {
   [constants.LOG_OUT]: () => ({ token: null }),
   [constants.LOCALE_SWITCHED]: (_, action) => ({ locale: action.payload }),
 
-  // TODO: this handle only API error responses.
-  // We should also handle all other kind of application errors,
-  // report them and show some kind of helpful message to the user.
+  [constants.CURRENT_USER] :  (state, action) => ({
+    user : action.payload
+  }),
+  [constants.NO_CURRENT_USER] :  (state, action) => ({
+    user : null
+  }),
   [constants.SHOW_ERROR]: (state, action) => {
     const { payload, source } = action
     return Object.assign({}, state, {

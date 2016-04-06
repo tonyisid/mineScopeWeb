@@ -45,12 +45,13 @@ export function signin (form, redirect) {
   }
 }
 export function getCurrentUser (token) {
+  console.log('--------'+ API.USER.CURRENT)
   return dispatch => {
-    get(API.USER.CURRENT,token)
+    post(API.USER.CURRENT, token)
       .then(resp=>{
         dispatch({
           type: constants.CURRENT_USER,
-          payload: resp.data
+          payload: resp
         })
       }, error=>{
         dispatch({
@@ -111,36 +112,7 @@ export function applyForSMSCode (form) {
       }
   }
 }
-export function getCurrentUser () {
-  return dispatch => {
-    dispatch({
-      type: constants.CURRENT_USER
-    })
-    post(API.USER.CURRENT_USER)
-      .then(resp => {
-        if (resp.result)
-          dispatch({
-            type: constants.CURRENT_USER_SUCCESS,
-            user: resp.data
-          })
-        else
-          dispatch({
-            type: constants.CURRENT_USER_FAILED,
-            error: resp.data
-          })
-      }, error => {
-        if (error.status === 406) {
-          dispatch({
-            type: constants.CURRENT_USER_EXPIRED
-          })
-        } else
-          dispatch({
-            type: constants.CURRENT_USER_FAILED,
-            error: error
-          })
-      })
-  }
-}
+
 export function logout () {
   return dispatch => {
     post(API.USER.LOGOUT)

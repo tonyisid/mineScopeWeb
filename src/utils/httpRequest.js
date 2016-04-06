@@ -3,12 +3,14 @@ import * as storage from '../persistence/storage'
 const SERVER = 'http://localhost:8888'
 
 const NETWORK_ERR = 'Maybe problem of network, please try again.'
-const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRvbnlxLnplbmdAMTYzLmNvbSIsImlkIjoiNTY5NGQxYmRmMWY1NGYwMDAwMDAwMDAxIiwicHJpdmlsZWdlIjpbXSwiaWF0IjoxNDU5Njc3NTE5LCJleHAiOjE0NTk3NjM5MTl9.mb16oIOK1X043iC3lMXBZ1pRmjWIZk7PKV0Kvumdx-k'
+const token = storage.get('token')
+
 export const API ={
   USER : {
     LOGIN : SERVER + '/login',
     LOGOUT : SERVER + '/logout',
     REGISTER : SERVER + '/register',
+    CURRENT : SERVER + '/currentuser',
     UPDATE : SERVER + '/update',
     APPLY_SMSCODE : SERVER + '/smscode',
     UPDATE_AVATAR : SERVER + '/account/avatar',

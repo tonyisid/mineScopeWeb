@@ -15,7 +15,6 @@ import { bindActionCreators } from 'redux'
   viewsActions : bindActionCreators(viewsActions, dispatch),
   applicationActions : bindActionCreators(applicationActions, dispatch)
 }))
-
 export default class UserBar extends React.Component {
   static propTypes = {
     application : React.PropTypes.object,
@@ -23,8 +22,10 @@ export default class UserBar extends React.Component {
     viewsActions : React.PropTypes.object
   }
   componentDidMount () {
-    window.onbeforeunload = () => {
-      this.props.applicationActions.logout()
+    const application = this.props.application
+    const applicationActions = this.props.applicationActions
+    if (application.token) {
+      applicationActions.getCurrentUser(application.token)
     }
   }
   handleLogout (e) {
