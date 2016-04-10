@@ -101,10 +101,10 @@ export default class UserBar extends React.Component {
     }
     const { user } = this.props.application
     const userButton = user ? (
-      <Button style={ styles.leftAvatar } onClick={ ::this.handleUserPane } >
+      <Link style={ styles.leftAvatar } to='/profile' >
         <span>{ user.name }</span>
         <img style={ styles.image } src = { user.avatar || defaultUser } />
-      </Button>
+      </Link>
     ) : (
       <Button style={ styles.leftAvatar } onClick={ ::this.handleSiginPane } >
         <span>点击登录</span>
@@ -114,7 +114,7 @@ export default class UserBar extends React.Component {
     return (
       <div style={ styles.container }>
         { userButton }
-        <Button style={ styles.rightButton } onClick={ ::this.handleCreate }>
+        <Button style={ styles.rightButton } onClick={ ::this.handleUserPane }>
           添加
         </Button>
         <div style={ styles.user }>

@@ -4,6 +4,7 @@ import createReducer from '../utils/create-reducer'
 const initialState = {
   products : [],
   currentIndex : 0,
+  grapProduct : null
 }
 
 const actionHandlers = {
@@ -30,6 +31,9 @@ const actionHandlers = {
   [constants.DELETE_PRODUCT] : (state, action) => ({
     products : state.products.filter(product =>
       product.id !== action.payload.id)
+  }),
+  [constants.GRAP_PRODUCT] : (state, action) => ({
+    grapProduct : action.payload
   }),
 }
 

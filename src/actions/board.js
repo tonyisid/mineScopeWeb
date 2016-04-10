@@ -17,6 +17,38 @@ export function getBoards ( option ) {
   }
 }
 
+export function getBoardByID (id) {
+  return dispatch => {
+    get(API.BOARDS + '/' + id )
+      .then( resp => {
+        dispatch({
+          type: constants.GET_BOARD,
+          payload: resp
+        })
+      }, error=> {
+        handleActionError(dispatch,error,constants.GET_BOARD)
+      })
+  }
+}
+export function setCurrentBoard (board) {
+  return {
+    type: constants.SET_CURRENT_BOARD,
+    payload: board
+  }
+}
+export function grapLink (url) {
+  return dispatch => {
+    post(API.PRODUCT.GRAP, { url : url })
+      .then( resp => {
+        dispatch({
+          type: constants.GRAP_FROM_URL,
+          payload: resp.data
+        })
+      }, error=>{
+        handleActionError(dispatch,error,constants.GRAP_FROM_URL)
+      })
+  }
+}
 export function addBoard ( board ) {
   return dispatch => {
     post(API.BOARDS, board)

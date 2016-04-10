@@ -1,5 +1,4 @@
 import * as storage from '../persistence/storage'
-// const SERVER = 'http://test.pin3d.cn/p3d/v2'
 const SERVER = 'http://localhost:8888'
 
 const NETWORK_ERR = 'Maybe problem of network, please try again.'
@@ -22,6 +21,7 @@ export const API ={
   BOARDS : SERVER + '/boards',
   PRODUCT : {
     PRODUCTS : SERVER + '/products',
+    GRAP : SERVER + '/grapproduct'
   },
   TAG : {
     CREATE_TAG : SERVER + '/tags/create',
@@ -31,7 +31,6 @@ export const API ={
 }
 
 export function fetch (url, type, data) {
-  console.log(type);
   return new Promise(function (resolve,reject) {
     $.ajax({
       url : url,
@@ -51,6 +50,7 @@ export function fetch (url, type, data) {
         resolve(resp)
       } ,
       error : (resp, statusText, error) => {
+        console.log(resp)
         reject({
           status : resp.status,
           errorMessage : resp.responseJSON.message

@@ -21,13 +21,12 @@ const actionHandlers = {
     user : action.payload
   }),
   [constants.NO_CURRENT_USER] :  (state, action) => ({
-    user : null
+    user : null,
+    token : null
   }),
   [constants.SHOW_ERROR]: (state, action) => {
     const { payload, source } = action
     return Object.assign({}, state, {
-      // TODO: ideally we want to map API error response codes
-      // with some user-friendly messages.
       error: {
         source,
         message: payload.errorMessage,

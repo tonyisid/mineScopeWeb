@@ -57,3 +57,17 @@ export function deleteProduct (product ) {
     })
   }
 }
+
+export function grapProduct (url) {
+  return dispatch => {
+    post(API.PRODUCT.GRAPPRODUCT,{ url : url })
+      .then(resp=>{
+        dispatch({
+          type: constants.GRAP_PRODUCT,
+          payload : resp.data
+        })
+      }, error=>{
+        handleActionError(dispatch, error, constants.GRAP_WORK)
+      })
+  }
+}

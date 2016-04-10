@@ -16,6 +16,8 @@ const {
   Home,
   Board,
   Login,
+  Profile,
+  BoardEditor
 } = components
 
 const initialState = {
@@ -46,6 +48,8 @@ function renderRoutes () {
       <Route component={Application}>
         <Route path="/" component={ Home } />
         <Route path="/board/:boardID" component={ Board } />
+        <Route path="profile" component={Profile} />
+        <Route path="editboard/:boardID" component={ BoardEditor } />
         <Route path="login" component={Login} />
         <Route path="logout" onEnter={logout} />
       </Route>

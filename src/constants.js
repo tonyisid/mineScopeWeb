@@ -23,11 +23,15 @@ export const PREVIOUS_PRODUCT = 'PREVIOUS_PRODUCT'
 export const ADD_PRODUCT = 'ADD_PRODUCT'
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
 export const DELETE_PRODUCT = 'DELETE_PRODUCT'
+export const GRAP_WORK = 'GRAP_WORK'
 
 export const GET_BOARDS = 'GET_BOARDS'
+export const GET_BOARD = 'GET_BOARD'
+export const SET_CURRENT_BOARD = 'SET_CURRENT_BOARD'
 export const ADD_BOARDS = 'ADD_BOARDS'
 export const UPDATE_BOARDS = 'UPDATE_BAORDS'
 export const DELETE_BOARDS = 'DELETE_BOARDS'
+export const GRAP_FROM_URL = 'GRAP_FROM_URL'
 
 // VIEWS
 export const SHOW_EDIT_PANE = 'SHOW_EDIT_PANE'

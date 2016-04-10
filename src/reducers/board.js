@@ -4,12 +4,23 @@ import createReducer from '../utils/create-reducer'
 const initialState = {
   boards : [],
   myBoards : [],
+  currentBoard : null,
+  grapedProduct : null,
   currentIndex : 0,
 }
 
 const actionHandlers = {
   [constants.GET_BOARDS]: (state, action) => ({
     boards : action.payload
+  }),
+  [constants.GET_BOARD]: (state, action) => ({
+    currentBoard : action.payload
+  }),
+  [constants.SET_CURRENT_BOARD]: (state, action) => ({
+    currentBoard : action.payload
+  }),
+  [constants.GRAP_FROM_URL]: (state, action) => ({
+    grapedProduct : action.payload
   }),
   [constants.VIEW_BOARD]: (state, action) => ({
     currentIndex : action.payload,
