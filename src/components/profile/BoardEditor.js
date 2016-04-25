@@ -4,17 +4,20 @@ import { Button } from '../common'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as boardActions from '../../actions/board'
+import * as productActions from '../../actions/product'
 import ObjectEditor from './ObjectEditor'
 
 @connect(state => ({
   board: state.board
 }), dispatch => ({
-  actions: bindActionCreators(boardActions, dispatch)
+  boardActions: bindActionCreators(boardActions, dispatch),
+  productActions: bindActionCreators(productActions, dispatch)
 }))
 export default class BoardEditor extends React.Component {
   static propTypes = {
     board : React.PropTypes.object,
-    actions : React.PropTypes.any,
+    boardActions : React.PropTypes.any,
+    productActions : React.PropTypes.any,
     selected : React.PropTypes.bool,
     editMode : React.PropTypes.bool,
     params : React.PropTypes.object
@@ -35,17 +38,17 @@ export default class BoardEditor extends React.Component {
     const currentBoard = board.boards.find(
       board => board._id === this.props.params.boardID)
     if (currentBoard)
-      this.props.actions.setCurrentBoard(currentBoard)
+      this.props.boardActions.setCurrentBoard(currentBoard)
     else
-      this.props.actions.getBoardByID(this.props.params.boardID)
+      this.props.boardActions.getBoardByID(this.props.params.boardID)
   }
   render () {
-    const { board, actions } = this.props
+    const { board, boardActions } = this.props
     if ( !board.currentBoard ) return null
     const { products, videos, musics, articles } = board.currentBoard
     const styles = {
       container : {
-        display : 'flex'
+        // display : 'flex'
       },
       products : {
 
@@ -53,7 +56,12 @@ export default class BoardEditor extends React.Component {
     }
     const renderProducts = products && products.map(product => {
       return (
-        <ProductThumbnail product={product} actions = { actions } />
+        <ProductThumbnail
+          key = { product._id }
+          product= { product }
+          board = { board.currentBoard }
+          boardActions = { boardActions }
+          productActions = { productActions } />
       )
     })
     return (

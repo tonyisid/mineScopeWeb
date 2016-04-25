@@ -1,12 +1,14 @@
 import React from 'react'
 import Radium from 'radium'
-import UserAvatar from '../common/UserAvatar'
+import { UserAvatar, Button } from '../common'
 
 @Radium
 export default class ProductThumbnail extends React.Component {
   static propTypes = {
+    board : React.PropTypes.object,
     product : React.PropTypes.object,
-    actions : React.PropTypes.any,
+    productActions : React.PropTypes.any,
+    boardActions : React.PropTypes.any,
     selected : React.PropTypes.bool,
     editMode : React.PropTypes.bool
   }
@@ -17,6 +19,11 @@ export default class ProductThumbnail extends React.Component {
     e.preventDefault()
   }
   handleChecked (e) {
+  }
+  handleRemove (e) {
+    e.preventDefault()
+    this.props.boardActions
+      .removeProductFromBoad(this.props.product,this.props.board)
   }
   render () {
     const styles = {
@@ -74,6 +81,9 @@ export default class ProductThumbnail extends React.Component {
       },
       likeMembers: {
         borderTop: '1px solid #ddd',
+      },
+      actionBar: {
+        position : 'absolute'
       }
     }
     const containerStyles = this.props.selected ?
@@ -82,12 +92,23 @@ export default class ProductThumbnail extends React.Component {
     return (
         <div style={ containerStyles }
           onClick={ this.handleClick } >
+          <div style={ styles.actionBar }>
+            <Button onClick={ ::this.handleRemove }>
+              删除
+            </Button>
+          </div>
           <div style={ styles.imageWrap }>
             <img style={ styles.imageStyles }
-              src={ this.props.product ? this.props.product.image : ''} />
+              src={ this.props.product ? this.props.product.cover : ''} />
           </div>
           <div style={ styles.title }>
             <p>{ this.props.product.title }</p>
+            { this.props.product.subtitle?
+              this.props.product.subtitle : null }
+          </div>
+          <div>
+            价格：{ this.props.product.price }
+            <a href={ this.props.product.originLink } target='_blank'>查看商品</a>
           </div>
           <div style={ styles.likePane }>
             { product.likeCount }

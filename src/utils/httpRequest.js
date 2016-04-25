@@ -21,7 +21,7 @@ export const API ={
   BOARDS : SERVER + '/boards',
   PRODUCT : {
     PRODUCTS : SERVER + '/products',
-    GRAP : SERVER + '/grapproduct'
+    GRAP : SERVER + '/grapproduct',
   },
   TAG : {
     CREATE_TAG : SERVER + '/tags/create',

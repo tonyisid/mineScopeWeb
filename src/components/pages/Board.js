@@ -3,13 +3,15 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as boardActions from '../../actions/board'
+import * as productActions from '../../actions/product'
 import Thumbnail from '../common/Thumbnail'
 import Player from '../player'
 
 @connect(state => ({
   board: state.board
 }), dispatch => ({
-  actions: bindActionCreators(boardActions, dispatch)
+  boardActions: bindActionCreators(boardActions, dispatch),
+  productActions : bindActionCreators(productActions, dispatch),
 }))
 export default class Home extends React.Component {
   static propTypes = {

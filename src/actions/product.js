@@ -1,6 +1,7 @@
 import * as constants from '../constants'
 import { post, get, put,del, API } from '../utils/httpRequest'
 import handleActionError from '../utils/handle-action-error'
+import handleActionInfo from '../utils/displayInfo'
 
 export function getProducts ( option ) {
   return dispatch => {
@@ -24,6 +25,7 @@ export function addProduct ( product ) {
         type : constants.ADD_PRODUCT,
         payload : resp
       })
+      handleActionInfo(dispatch,'成功保存商品')
     },error => {
       handleActionError(dispatch, error, constants.ADD_WORK)
     })

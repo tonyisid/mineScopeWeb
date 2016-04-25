@@ -43,6 +43,15 @@ const actionHandlers = {
     boards : state.boards.filter(board =>
       board.id !== action.payload.id)
   }),
+  [constants.ADD_PRODUCT_TO_BOARD] : (state, action) => ({
+    currentBoard : { ...state.currentBoard,
+      products : [ ...state.currentBoard.products, action.product ] }
+  }),
+  [constants.REMOVE_PRODUCT_FROM_BOARD] : (state, action) => ({
+    currentBoard : { ...state.currentBoard,
+      products : state.currentBoard.products.filter( product =>
+        product._id !== action.product._id) }
+  })
 }
 
 export default createReducer(initialState, actionHandlers)

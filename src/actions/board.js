@@ -49,6 +49,37 @@ export function grapLink (url) {
       })
   }
 }
+export function addProductToBoard (url,board) {
+  return dispatch => {
+    put(API.BOARDS + '/' + board._id+'/add', { type: 'p', url: url })
+      .then( resp => {
+        dispatch({
+          type: constants.ADD_PRODUCT_TO_BOARD,
+          board: board,
+          product: resp
+        })
+      }, error => {
+        handleActionError(dispatch,error,constants.GRAP_FROM_URL)
+      })
+  }
+}
+export function removeProductFromBoad (product, board) {
+  return dispatch => {
+    put(API.BOARDS + '/' + board._id + '/remove',
+      { type : 'p', oid : product._id })
+      .then(resp => {
+        dispatch({
+          type: constants.REMOVE_PRODUCT_FROM_BOARD,
+          product : product,
+          board: board
+        })
+        displayInfo(dispatch, '移除商品成功')
+      })
+      .catch(error => {
+
+      })
+  }
+}
 export function addBoard ( board ) {
   return dispatch => {
     post(API.BOARDS, board)
