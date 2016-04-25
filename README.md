@@ -1,10 +1,6 @@
 
 #mineScopeWeb
 
-This is a boilerplate example showcasing _mostly_ [Redux](https://github.com/gaearon/redux) and [React Router](https://github.com/rackt/react-router).
-
-> Still a **WIP** but it aims to provide different examples or use cases with the two libraries.
-
 ## Features
 
 - latest `react`, `redux`, `react-router`
@@ -61,4 +57,3 @@ $ npm run build:i18n:langs
 - [React-Router](https://github.com/rackt/react-router) for the other goodness.
 - [React-Transform](https://github.com/gaearon/react-transform-boilerplate) for development fun (and productivity).
 - [Webpack](https://github.com/webpack/webpack) for keeping everything together.
-# mineScopeWeb

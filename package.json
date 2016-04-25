@@ -1,17 +1,13 @@
 {
-  "name": "redux-react-router-async-example",
+  "name": "mineScopeWeb",
   "version": "0.0.1",
-  "description": "",
-  "homepage": "https://github.com/emmenko/redux-react-router-async-example",
-  "author": "Nicola Molinari <emmenko@gmail.com>",
+  "description": "mineScopeWeb",
+  "author": "Zeng tonyq.zeng@163.com",
   "repository": {
     "type": "git",
-    "url": "https://github.com/emmenko/redux-react-router-async-example.git"
+    "url": "git@github.com:tonyisid/mineScopeWeb.git"
   },
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/emmenko/redux-react-router-async-example/issues"
-  },
   "scripts": {
     "build": "npm run clean  && webpack",
     "build:i18n": "rimraf _translations && babel --quiet --babelrc .babelrc.i18n lib > /dev/null",
